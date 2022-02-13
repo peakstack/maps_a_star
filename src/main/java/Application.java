@@ -13,17 +13,11 @@ import pathfinding.City;
 import pathfinding.Node;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -145,6 +139,8 @@ public class Application {
         endPanel.add(endCombo);
 
         JButton button = new JButton("Demo");
+
+        //Demo der Suche, nichts wichtiges
         button.addActionListener(e -> {
             running.set(!running.get());
 
