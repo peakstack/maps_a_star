@@ -13,11 +13,18 @@ import pathfinding.City;
 import pathfinding.Node;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -137,8 +144,49 @@ public class Application {
         endPanel.setLayout(new GridLayout());
         endPanel.add(endCombo);
 
+        JButton button = new JButton("Demo");
+        button.addActionListener(e -> {
+            running.set(!running.get());
+
+            if (!running.get()) {
+                return;
+            }
+            List<GeoPosition> positionList = Arrays.asList(
+                    loerrach, weil, binzen, efringen_kirchen,
+                    steinen, maulburg, schopfheim, hausen,
+                    zell, wittlingen, kandern, bad_bellingen,
+                    schliengen, auggen, muellheim, marzell,
+                    tegernau, schoenau, muenstertal,
+                    staufen, heitersheim
+            );
+
+            new Thread(() -> {
+                for(int i = 0; i < positionList.size(); i++) {
+                    for (int j = 0; j < positionList.size(); j++) {
+                        if (!running.get()) {
+                            return;
+                        }
+                        startCombo.setSelectedIndex(i);
+                        endCombo.setSelectedIndex(j);
+                        searchRoute(startCombo, endCombo,
+                                loerrach, weil, binzen, efringen_kirchen,
+                                steinen, maulburg, schopfheim, hausen,
+                                zell, wittlingen, kandern, bad_bellingen,
+                                schliengen, auggen, muellheim, marzell,
+                                tegernau, schoenau, muenstertal,
+                                staufen, heitersheim);
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException ignored) {
+                        }
+                    }
+                }
+            }).start();
+        });
+
         topPanel.add(startPanel);
         topPanel.add(endPanel);
+        topPanel.add(button);
 
         final JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
@@ -152,6 +200,8 @@ public class Application {
         mapViewer.addPropertyChangeListener("center", evt -> updateWindowTitle(frame, mapViewer));
         updateWindowTitle(frame, mapViewer);
     }
+
+    private static final AtomicBoolean running = new AtomicBoolean(false);
 
     private static void searchRoute(JComboBox<String> startCombo, JComboBox<String> endCombo,
                                     GeoPosition loerrach, GeoPosition weil, GeoPosition binzen,
