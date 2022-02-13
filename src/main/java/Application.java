@@ -30,6 +30,7 @@ public class Application {
 
         final JXMapViewer mapViewer = new JXMapViewer();
         mapViewer.setTileFactory(tileFactory);
+        tileFactory.setThreadPoolSize(8);
 
         GeoPosition loerrach = new GeoPosition(City.LOERRACH.getLatitude(), City.LOERRACH.getLongitude());
         GeoPosition weil = new GeoPosition(City.WEIL.getLatitude(), City.WEIL.getLongitude());
