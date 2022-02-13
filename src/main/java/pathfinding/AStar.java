@@ -338,7 +338,7 @@ public class AStar {
         return path;
     }
 
-    public static void AStarSearch(Node sourceNode, Node goal){
+    private static void AStarSearch(Node sourceNode, Node goal){
         Set<Node> exploredNodes = new HashSet<>();
 
         PriorityQueue<Node> nodeQueue = new PriorityQueue<>(20,
