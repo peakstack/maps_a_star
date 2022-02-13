@@ -26,6 +26,10 @@ public class AStar {
         return deg * (Math.PI / 180.0D);
     }
 
+    /*
+     * Die Kosten sind die realen Streckenwerte
+     * Die H-Kosten sind die berechneten Luft-Distanzen der verschiedenen Geo-Punkte
+     */
     public static List<Node> findPath(City start, City end){
         Node loerrach = new Node("Lörrach",
                 getDistanceFromLatLonInKm(LOERRACH.latitude, LOERRACH.longitude, end.latitude, end.longitude));
@@ -133,7 +137,8 @@ public class AStar {
                 new Edge(wittlingen,11.9),
                 new Edge(marzell,9.3),
                 new Edge(schliengen,8.9),
-                new Edge(steinen,14.0)
+                new Edge(steinen,14.0),
+                new Edge(muellheim,15.7)
         });
 
         bad_bellingen.setAdjacencies(new Edge[]{
@@ -157,7 +162,8 @@ public class AStar {
                 new Edge(marzell,15.7),
                 new Edge(auggen,3.6),
                 new Edge(staufen,14.4),
-                new Edge(heitersheim, 9.0)
+                new Edge(heitersheim, 9.0),
+                new Edge(kandern,15.7)
         });
 
         marzell.setAdjacencies(new Edge[]{
@@ -335,7 +341,7 @@ public class AStar {
     public static List<Node> printPath(Node target){
         List<Node> path = new ArrayList<>();
 
-        for(Node node = target; node != null; node = node.getParent()){
+        for (Node node = target; node != null; node = node.getParent()){
             path.add(node);
         }
         Collections.reverse(path);

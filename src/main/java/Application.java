@@ -216,14 +216,8 @@ public class Application {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        mapViewer.addPropertyChangeListener("zoom", evt -> {
-            updateWindowTitle(frame, mapViewer);
-        });
-
-        mapViewer.addPropertyChangeListener("center", evt -> {
-            updateWindowTitle(frame, mapViewer);
-        });
-
+        mapViewer.addPropertyChangeListener("zoom", evt -> updateWindowTitle(frame, mapViewer));
+        mapViewer.addPropertyChangeListener("center", evt -> updateWindowTitle(frame, mapViewer));
         updateWindowTitle(frame, mapViewer);
     }
 
@@ -233,7 +227,7 @@ public class Application {
         double lon = mapViewer.getCenterPosition().getLongitude();
         int zoom = mapViewer.getZoom();
 
-        frame.setTitle(String.format("A-Star Kartensuche (%.2f / %.2f) - Zoom: %d", lat, lon, zoom));
+        frame.setTitle(String.format("A* Kartensuche (%.2f / %.2f) - Zoom: %d", lat, lon, zoom));
     }
 
 }
