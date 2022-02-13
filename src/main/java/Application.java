@@ -31,27 +31,27 @@ public class Application {
         final JXMapViewer mapViewer = new JXMapViewer();
         mapViewer.setTileFactory(tileFactory);
 
-        GeoPosition loerrach = new GeoPosition(47.616, 7.668);
-        GeoPosition weil = new GeoPosition(47.593, 7.623);
-        GeoPosition binzen = new GeoPosition(47.631, 7.624);
-        GeoPosition efringen_kirchen = new GeoPosition(47.655, 7.563);
-        GeoPosition steinen = new GeoPosition(47.644, 7.739);
-        GeoPosition maulburg = new GeoPosition(47.643, 7.780);
-        GeoPosition schopfheim = new GeoPosition(47.650, 7.825);
-        GeoPosition hausen = new GeoPosition(47.680, 7.841);
-        GeoPosition zell = new GeoPosition(47.707, 7.852);
-        GeoPosition wittlingen = new GeoPosition(47.656, 7.648);
-        GeoPosition kandern = new GeoPosition(47.713, 7.662);
-        GeoPosition bad_bellingen = new GeoPosition(47.731, 7.557);
-        GeoPosition schliengen = new GeoPosition(47.755, 7.579);
-        GeoPosition auggen = new GeoPosition(47.787, 7.593);
-        GeoPosition muellheim = new GeoPosition(47.804, 7.629);
-        GeoPosition marzell = new GeoPosition(47.771, 7.726);
-        GeoPosition tegernau = new GeoPosition(47.719, 7.795);
-        GeoPosition schoenau = new GeoPosition(47.785, 7.893);
-        GeoPosition muenstertal = new GeoPosition(47.854, 7.784);
-        GeoPosition staufen = new GeoPosition(47.882, 7.729);
-        GeoPosition heitersheim = new GeoPosition(47.874, 7.655);
+        GeoPosition loerrach = new GeoPosition(City.LOERRACH.getLatitude(), City.LOERRACH.getLongitude());
+        GeoPosition weil = new GeoPosition(City.WEIL.getLatitude(), City.WEIL.getLongitude());
+        GeoPosition binzen = new GeoPosition(City.BINZEN.getLatitude(), City.BINZEN.getLongitude());
+        GeoPosition efringen_kirchen = new GeoPosition(City.EFRINGEN_KIRCHEN.getLatitude(), City.EFRINGEN_KIRCHEN.getLongitude());
+        GeoPosition steinen = new GeoPosition(City.STEINEN.getLatitude(), City.STEINEN.getLongitude());
+        GeoPosition maulburg = new GeoPosition(City.MAULBURG.getLatitude(), City.MAULBURG.getLongitude());
+        GeoPosition schopfheim = new GeoPosition(City.SCHOPFHEIM.getLatitude(), City.SCHOPFHEIM.getLongitude());
+        GeoPosition hausen = new GeoPosition(City.HAUSEN.getLatitude(), City.HAUSEN.getLongitude());
+        GeoPosition zell = new GeoPosition(City.ZELL.getLatitude(), City.ZELL.getLongitude());
+        GeoPosition wittlingen = new GeoPosition(City.WITTLINGEN.getLatitude(), City.WITTLINGEN.getLongitude());
+        GeoPosition kandern = new GeoPosition(City.KANDERN.getLatitude(), City.KANDERN.getLongitude());
+        GeoPosition bad_bellingen = new GeoPosition(City.BAD_BELLINGEN.getLatitude(), City.BAD_BELLINGEN.getLongitude());
+        GeoPosition schliengen = new GeoPosition(City.SCHLIENGEN.getLatitude(), City.SCHLIENGEN.getLongitude());
+        GeoPosition auggen = new GeoPosition(City.AUGGEN.getLatitude(), City.AUGGEN.getLongitude());
+        GeoPosition muellheim = new GeoPosition(City.MUELLHEIM.getLatitude(), City.MUELLHEIM.getLongitude());
+        GeoPosition marzell = new GeoPosition(City.MARZELL.getLatitude(), City.MARZELL.getLongitude());
+        GeoPosition tegernau = new GeoPosition(City.TEGERNAU.getLatitude(), City.TEGERNAU.getLongitude());
+        GeoPosition schoenau = new GeoPosition(City.SCHOENAU.getLatitude(), City.SCHOENAU.getLongitude());
+        GeoPosition muenstertal = new GeoPosition(City.MUENSTERTAL.getLatitude(), City.MUENSTERTAL.getLongitude());
+        GeoPosition staufen = new GeoPosition(City.STAUFEN.getLatitude(), City.STAUFEN.getLongitude());
+        GeoPosition heitersheim = new GeoPosition(City.HEITERSHEIM.getLatitude(), City.HEITERSHEIM.getLongitude());
 
         List<GeoPosition> track = Arrays.asList(
                 loerrach, weil, binzen, efringen_kirchen,
@@ -93,43 +93,43 @@ public class Application {
         mapViewer.addMouseMotionListener(sa);
         mapViewer.setOverlayPainter(cp);
 
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("Suche eine Start-Stadt aus");
+        JPanel startPanel = new JPanel();
+        JLabel startLabel = new JLabel("Suche eine Start-Stadt aus");
 
-        final List<City> cities = new ArrayList<>(Arrays.asList(City.values()));
+        final List<City> startCities = new ArrayList<>(Arrays.asList(City.values()));
 
-        String[] tfLabels = cities
+        String[] tfLabelsStart = startCities
                 .stream()
                 .map(Enum::name)
                 .toArray(String[]::new);
 
-        final JComboBox<String> combo = new JComboBox<>(tfLabels);
+        final JComboBox<String> startCombo = new JComboBox<>(tfLabelsStart);
 
-        panel.setLayout(new GridLayout());
-        panel.add(label);
-        panel.add(combo);
+        startPanel.setLayout(new GridLayout());
+        startPanel.add(startLabel);
+        startPanel.add(startCombo);
 
-        JPanel panel2 = new JPanel();
-        JLabel label2 = new JLabel("Suche eine End-Stadt aus");
+        JPanel endPanel = new JPanel();
+        JLabel endLabel = new JLabel("Suche eine End-Stadt aus");
 
-        final List<City> cities2 = new ArrayList<>(Arrays.asList(City.values()));
+        final List<City> endCities = new ArrayList<>(Arrays.asList(City.values()));
 
-        String[] tfLabels2 = cities2
+        String[] tfLabelsEnd = endCities
                 .stream()
                 .map(Enum::name)
                 .toArray(String[]::new);
 
-        final JComboBox<String> combo2 = new JComboBox<>(tfLabels2);
+        final JComboBox<String> endCombo = new JComboBox<>(tfLabelsEnd);
 
-        panel2.setLayout(new GridLayout());
-        panel2.add(label2);
-        panel2.add(combo2);
+        endPanel.setLayout(new GridLayout());
+        endPanel.add(endLabel);
+        endPanel.add(endCombo);
 
         JButton searchButton = new JButton("Suchen");
 
         searchButton.addActionListener(e -> {
-            City start = City.valueOf(Objects.requireNonNull(combo.getSelectedItem()).toString());
-            City end = City.valueOf(Objects.requireNonNull(combo2.getSelectedItem()).toString());
+            City start = City.valueOf(Objects.requireNonNull(startCombo.getSelectedItem()).toString());
+            City end = City.valueOf(Objects.requireNonNull(endCombo.getSelectedItem()).toString());
 
             List<Node> path = AStar.findPath(start, end);
 
@@ -208,8 +208,8 @@ public class Application {
 
         final JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
-        frame.add(panel, BorderLayout.NORTH);
-        frame.add(panel2, BorderLayout.SOUTH);
+        frame.add(startPanel, BorderLayout.NORTH);
+        frame.add(endPanel, BorderLayout.SOUTH);
         frame.add(searchButton, BorderLayout.EAST);
         frame.add(mapViewer);
         frame.setSize(1600, 1200);
@@ -233,7 +233,7 @@ public class Application {
         double lon = mapViewer.getCenterPosition().getLongitude();
         int zoom = mapViewer.getZoom();
 
-        frame.setTitle(String.format("(%.2f / %.2f) - Zoom: %d", lat, lon, zoom));
+        frame.setTitle(String.format("A-Star Kartensuche (%.2f / %.2f) - Zoom: %d", lat, lon, zoom));
     }
 
 }
