@@ -73,7 +73,8 @@ public class AStar {
         loerrach.setAdjacencies(new Edge[]{
                 new Edge(steinen,8.0),
                 new Edge(weil,6.9),
-                new Edge(wittlingen,7.2)
+                new Edge(wittlingen,7.2),
+                new Edge(binzen,5.6)
         });
 
         weil.setAdjacencies(new Edge[]{
@@ -85,7 +86,8 @@ public class AStar {
         binzen.setAdjacencies(new Edge[]{
                 new Edge(wittlingen,3.3),
                 new Edge(weil,5.5),
-                new Edge(efringen_kirchen,7.1)
+                new Edge(efringen_kirchen,7.1),
+                new Edge(loerrach,5.6)
         });
 
         efringen_kirchen.setAdjacencies(new Edge[]{
@@ -96,7 +98,8 @@ public class AStar {
 
         steinen.setAdjacencies(new Edge[]{
                 new Edge(loerrach,8.1),
-                new Edge(maulburg,4.0)
+                new Edge(maulburg,4.0),
+                new Edge(kandern,14.0)
         });
 
         maulburg.setAdjacencies(new Edge[]{
@@ -129,7 +132,8 @@ public class AStar {
         kandern.setAdjacencies(new Edge[]{
                 new Edge(wittlingen,11.9),
                 new Edge(marzell,9.3),
-                new Edge(schliengen,8.9)
+                new Edge(schliengen,8.9),
+                new Edge(steinen,14.0)
         });
 
         bad_bellingen.setAdjacencies(new Edge[]{
