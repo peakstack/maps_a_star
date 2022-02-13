@@ -70,125 +70,125 @@ public class AStar {
         Node heitersheim = new Node("Heitersheim",
                 getDistanceFromLatLonInKm(HEITERSHEIM.latitude, HEITERSHEIM.longitude, end.latitude, end.longitude));
 
-        loerrach.adjacencies = new Edge[]{
+        loerrach.setAdjacencies(new Edge[]{
                 new Edge(steinen,8.0),
                 new Edge(weil,6.9),
                 new Edge(wittlingen,7.2)
-        };
+        });
 
-        weil.adjacencies = new Edge[]{
+        weil.setAdjacencies(new Edge[]{
                 new Edge(loerrach,6.9),
                 new Edge(binzen,5.4),
                 new Edge(efringen_kirchen,10.3)
-        };
+        });
 
-        binzen.adjacencies = new Edge[]{
+        binzen.setAdjacencies(new Edge[]{
                 new Edge(wittlingen,3.3),
                 new Edge(weil,5.5),
                 new Edge(efringen_kirchen,7.1)
-        };
+        });
 
-        efringen_kirchen.adjacencies = new Edge[]{
+        efringen_kirchen.setAdjacencies(new Edge[]{
                 new Edge(weil,10.3),
                 new Edge(binzen,7.1),
                 new Edge(bad_bellingen,11.5)
-        };
+        });
 
-        steinen.adjacencies = new Edge[]{
+        steinen.setAdjacencies(new Edge[]{
                 new Edge(loerrach,8.1),
                 new Edge(maulburg,4.0)
-        };
+        });
 
-        maulburg.adjacencies = new Edge[]{
+        maulburg.setAdjacencies(new Edge[]{
                 new Edge(steinen,3.9),
                 new Edge(schopfheim,4.5)
-        };
+        });
 
-        schopfheim.adjacencies = new Edge[]{
+        schopfheim.setAdjacencies(new Edge[]{
                 new Edge(maulburg,4.4),
                 new Edge(hausen,4.3)
-        };
+        });
 
-        hausen.adjacencies = new Edge[]{
+        hausen.setAdjacencies(new Edge[]{
                 new Edge(schopfheim,4.2),
                 new Edge(zell,4.4)
-        };
+        });
 
-        zell.adjacencies = new Edge[]{
+        zell.setAdjacencies(new Edge[]{
                 new Edge(tegernau,8.9),
                 new Edge(hausen,4.4),
                 new Edge(schoenau,10.8)
-        };
+        });
 
-        wittlingen.adjacencies = new Edge[]{
+        wittlingen.setAdjacencies(new Edge[]{
                 new Edge(kandern,7.4),
                 new Edge(binzen,4.2),
                 new Edge(loerrach,7.2)
-        };
+        });
 
-        kandern.adjacencies = new Edge[]{
+        kandern.setAdjacencies(new Edge[]{
                 new Edge(wittlingen,11.9),
                 new Edge(marzell,9.3),
                 new Edge(schliengen,8.9)
-        };
+        });
 
-        bad_bellingen.adjacencies = new Edge[]{
+        bad_bellingen.setAdjacencies(new Edge[]{
                 new Edge(schliengen,4.1),
                 new Edge(efringen_kirchen,11.4)
-        };
+        });
 
-        schliengen.adjacencies = new Edge[]{
+        schliengen.setAdjacencies(new Edge[]{
                 new Edge(auggen,3.8),
                 new Edge(bad_bellingen,4.1),
                 new Edge(kandern,8.9)
-        };
+        });
 
-        auggen.adjacencies = new Edge[]{
+        auggen.setAdjacencies(new Edge[]{
                 new Edge(muellheim,3.6),
                 new Edge(schliengen,3.9),
                 new Edge(heitersheim,11.5)
-        };
+        });
 
-        muellheim.adjacencies = new Edge[]{
+        muellheim.setAdjacencies(new Edge[]{
                 new Edge(marzell,15.7),
                 new Edge(auggen,3.6),
                 new Edge(staufen,14.4),
                 new Edge(heitersheim, 9.0)
-        };
+        });
 
-        marzell.adjacencies = new Edge[]{
+        marzell.setAdjacencies(new Edge[]{
                 new Edge(muellheim,15.7),
                 new Edge(kandern,9.3),
                 new Edge(tegernau,10.6)
-        };
+        });
 
-        tegernau.adjacencies = new Edge[]{
+        tegernau.setAdjacencies(new Edge[]{
                 new Edge(zell,8.9),
                 new Edge(marzell,10.6),
                 new Edge(hausen,8.4)
-        };
+        });
 
-        schoenau.adjacencies = new Edge[]{
+        schoenau.setAdjacencies(new Edge[]{
                 new Edge(zell,10.7),
                 new Edge(muenstertal,24.5)
-        };
+        });
 
-        muenstertal.adjacencies = new Edge[]{
+        muenstertal.setAdjacencies(new Edge[]{
                 new Edge(schoenau,24.6),
                 new Edge(staufen,5.6),
-        };
+        });
 
-        staufen.adjacencies = new Edge[]{
+        staufen.setAdjacencies(new Edge[]{
                 new Edge(heitersheim,6.1),
                 new Edge(muenstertal,5.6),
                 new Edge(muellheim,14.4),
-        };
+        });
 
-        heitersheim.adjacencies = new Edge[]{
+        heitersheim.setAdjacencies(new Edge[]{
                 new Edge(staufen,6.1),
                 new Edge(muellheim,9.1),
                 new Edge(auggen,11.5)
-        };
+        });
 
         Node startNode = null, endNode = null;
 
@@ -331,7 +331,7 @@ public class AStar {
     public static List<Node> printPath(Node target){
         List<Node> path = new ArrayList<>();
 
-        for(Node node = target; node != null; node = node.parent){
+        for(Node node = target; node != null; node = node.getParent()){
             path.add(node);
         }
         Collections.reverse(path);

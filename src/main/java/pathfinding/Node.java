@@ -1,12 +1,12 @@
 package pathfinding;
 
 public class Node {
-    public final String value;
-    public double gScores;
-    public final double hScores;
+    private final String value;
+    private double gScores;
+    private final double hScores;
     public double fScores = 0;
-    public Edge[] adjacencies;
-    public Node parent;
+    private Edge[] adjacencies;
+    private Node parent;
 
     public Node(String val, double hVal){
         this.value = val;
@@ -46,7 +46,15 @@ public class Node {
         this.parent = parent;
     }
 
+    public Node getParent() {
+        return parent;
+    }
+
     public Edge[] getAdjacencies() {
         return adjacencies;
+    }
+
+    public void setAdjacencies(Edge[] adjacencies) {
+        this.adjacencies = adjacencies;
     }
 }

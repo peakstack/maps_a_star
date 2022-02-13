@@ -1,8 +1,8 @@
 package pathfinding;
 
 class Edge {
-    public final double cost;
-    public final Node target;
+    private final double cost;
+    private final Node target;
 
     public Edge(Node target, double cost){
         this.target = target;

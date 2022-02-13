@@ -136,7 +136,7 @@ public class Application {
             RoutePainter.nodes.clear();
             ArrayList<GeoPosition> positions = new ArrayList<>();
             for(Node node : path) {
-                switch (node.value) {
+                switch (node.getValue()) {
                     case "Lörrach":
                         positions.add(loerrach);
                         break;
