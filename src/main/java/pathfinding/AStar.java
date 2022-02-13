@@ -334,50 +334,50 @@ public class AStar {
                 break;
         }
 
-        AStarSearch(startNode, endNode);
+        executeSearch(startNode, endNode);
         return printPath(endNode);
     }
 
-    public static List<Node> printPath(Node target){
+    public static List<Node> printPath(Node targetNode){
         List<Node> path = new ArrayList<>();
 
-        for (Node node = target; node != null; node = node.getParent()){
+        for (Node node = targetNode; node != null; node = node.getParent()){
             path.add(node);
         }
         Collections.reverse(path);
         return path;
     }
 
-    private static void AStarSearch(Node sourceNode, Node goal){
+    private static void executeSearch(Node sourceNode, Node goal){
         Set<Node> exploredNodes = new HashSet<>();
 
-        PriorityQueue<Node> nodeQueue = new PriorityQueue<>(20,
+        PriorityQueue<Node> nodeQueue = new PriorityQueue<>(30,
                 Comparator.comparingDouble(i -> i.fScores)
         );
         sourceNode.setGScores(0);
         nodeQueue.add(sourceNode);
         boolean found = false;
 
-        while(!nodeQueue.isEmpty() && !found){
+        while (!nodeQueue.isEmpty() && !found){
             Node currentNode = nodeQueue.poll();
             exploredNodes.add(currentNode);
 
-            if(currentNode.getValue().equals(goal.getValue())){
+            if (currentNode.getValue().equals(goal.getValue())){
                 found = true;
             }
 
-            for(Edge edge : currentNode.getAdjacencies()){
+            for (Edge edge : currentNode.getAdjacencies()){
                 Node child = edge.getTarget();
                 double cost = edge.getCost();
                 double tempGScores = currentNode.getGScores() + cost;
                 double tempFScores = tempGScores + child.getHScores();
+                double childFScores = child.getFScores();
 
-                if((exploredNodes.contains(child)) &&
-                        (tempFScores >= child.getFScores())){
+                if(exploredNodes.contains(child)
+                        && tempFScores >= childFScores){
                     continue;
-                }
-                else if (!nodeQueue.contains(child)
-                        || tempFScores < child.getFScores()){
+                } else if (!nodeQueue.contains(child)
+                        || tempFScores < childFScores){
                     exploredNodes.remove(child);
 
                     child.setParent(currentNode);

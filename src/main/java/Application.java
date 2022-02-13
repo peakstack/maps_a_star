@@ -15,6 +15,8 @@ import pathfinding.Node;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import java.util.*;
@@ -94,124 +96,55 @@ public class Application {
         mapViewer.addMouseMotionListener(sa);
         mapViewer.setOverlayPainter(cp);
 
+        JPanel topPanel = new JPanel();
+
         JPanel startPanel = new JPanel();
-        JLabel startLabel = new JLabel("Suche eine Start-Stadt aus");
+        JPanel endPanel = new JPanel();
 
         final List<City> startCities = new ArrayList<>(Arrays.asList(City.values()));
+        final List<City> endCities = new ArrayList<>(Arrays.asList(City.values()));
 
         String[] tfLabelsStart = startCities
                 .stream()
                 .map(Enum::name)
                 .toArray(String[]::new);
 
-        final JComboBox<String> startCombo = new JComboBox<>(tfLabelsStart);
-
-        startPanel.setLayout(new GridLayout());
-        startPanel.add(startLabel);
-        startPanel.add(startCombo);
-
-        JPanel endPanel = new JPanel();
-        JLabel endLabel = new JLabel("Suche eine End-Stadt aus");
-
-        final List<City> endCities = new ArrayList<>(Arrays.asList(City.values()));
-
         String[] tfLabelsEnd = endCities
                 .stream()
                 .map(Enum::name)
                 .toArray(String[]::new);
 
+        final JComboBox<String> startCombo = new JComboBox<>(tfLabelsStart);
         final JComboBox<String> endCombo = new JComboBox<>(tfLabelsEnd);
 
+        startCombo.addActionListener(e -> searchRoute(startCombo, endCombo,
+                loerrach, weil, binzen, efringen_kirchen,
+                steinen, maulburg, schopfheim, hausen,
+                zell, wittlingen, kandern, bad_bellingen,
+                schliengen, auggen, muellheim, marzell,
+                tegernau, schoenau, muenstertal,
+                staufen, heitersheim));
+
+        endCombo.addActionListener(e -> searchRoute(startCombo, endCombo,
+                loerrach, weil, binzen, efringen_kirchen,
+                steinen, maulburg, schopfheim, hausen,
+                zell, wittlingen, kandern, bad_bellingen,
+                schliengen, auggen, muellheim, marzell,
+                tegernau, schoenau, muenstertal,
+                staufen, heitersheim));
+
+        startPanel.setLayout(new GridLayout());
+        startPanel.add(startCombo);
+
         endPanel.setLayout(new GridLayout());
-        endPanel.add(endLabel);
         endPanel.add(endCombo);
 
-        JButton searchButton = new JButton("Suchen");
-
-        searchButton.addActionListener(e -> {
-            City start = City.valueOf(Objects.requireNonNull(startCombo.getSelectedItem()).toString());
-            City end = City.valueOf(Objects.requireNonNull(endCombo.getSelectedItem()).toString());
-
-            List<Node> path = AStar.findPath(start, end);
-
-            RoutePainter.nodes.clear();
-            ArrayList<GeoPosition> positions = new ArrayList<>();
-            for(Node node : path) {
-                switch (node.getValue()) {
-                    case "Lörrach":
-                        positions.add(loerrach);
-                        break;
-                    case "Weil am Rhein":
-                        positions.add(weil);
-                        break;
-                    case "Binzen":
-                        positions.add(binzen);
-                        break;
-                    case "Efringen-Kirchen":
-                        positions.add(efringen_kirchen);
-                        break;
-                    case "Steinen":
-                        positions.add(steinen);
-                        break;
-                    case "Maulburg":
-                        positions.add(maulburg);
-                        break;
-                    case "Schopfheim":
-                        positions.add(schopfheim);
-                        break;
-                    case "Hausen":
-                        positions.add(hausen);
-                        break;
-                    case "Zell":
-                        positions.add(zell);
-                        break;
-                    case "Wittlingen":
-                        positions.add(wittlingen);
-                        break;
-                    case "Kandern":
-                        positions.add(kandern);
-                        break;
-                    case "Bad Bellingen":
-                        positions.add(bad_bellingen);
-                        break;
-                    case "Schliengen":
-                        positions.add(schliengen);
-                        break;
-                    case "Auggen":
-                        positions.add(auggen);
-                        break;
-                    case "Müllheim":
-                        positions.add(muellheim);
-                        break;
-                    case "Malsburg-Marzell":
-                        positions.add(marzell);
-                        break;
-                    case "Tegernau":
-                        positions.add(tegernau);
-                        break;
-                    case "Schönau":
-                        positions.add(schoenau);
-                        break;
-                    case "Münstertal":
-                        positions.add(muenstertal);
-                        break;
-                    case "Staufen":
-                        positions.add(staufen);
-                        break;
-                    case "Heitersheim":
-                        positions.add(heitersheim);
-                        break;
-                }
-            }
-            RoutePainter.nodes.addAll(positions);
-            RoutePainter.update();
-        });
+        topPanel.add(startPanel);
+        topPanel.add(endPanel);
 
         final JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
-        frame.add(startPanel, BorderLayout.NORTH);
-        frame.add(endPanel, BorderLayout.SOUTH);
-        frame.add(searchButton, BorderLayout.EAST);
+        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(mapViewer);
         frame.setSize(1600, 1200);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -220,6 +153,93 @@ public class Application {
         mapViewer.addPropertyChangeListener("zoom", evt -> updateWindowTitle(frame, mapViewer));
         mapViewer.addPropertyChangeListener("center", evt -> updateWindowTitle(frame, mapViewer));
         updateWindowTitle(frame, mapViewer);
+    }
+
+    private static void searchRoute(JComboBox<String> startCombo, JComboBox<String> endCombo,
+                                    GeoPosition loerrach, GeoPosition weil, GeoPosition binzen,
+                                    GeoPosition efringen_kirchen, GeoPosition steinen,
+                                    GeoPosition maulburg, GeoPosition schopfheim, GeoPosition hausen,
+                                    GeoPosition zell, GeoPosition wittlingen, GeoPosition kandern,
+                                    GeoPosition bad_bellingen, GeoPosition schliengen, GeoPosition auggen,
+                                    GeoPosition muellheim, GeoPosition marzell, GeoPosition tegernau,
+                                    GeoPosition schoenau, GeoPosition muenstertal, GeoPosition staufen,
+                                    GeoPosition heitersheim) {
+        City start = City.valueOf(Objects.requireNonNull(startCombo.getSelectedItem()).toString());
+        City end = City.valueOf(Objects.requireNonNull(endCombo.getSelectedItem()).toString());
+
+        List<Node> path = AStar.findPath(start, end);
+
+        RoutePainter.nodes.clear();
+        ArrayList<GeoPosition> positions = new ArrayList<>();
+        for(Node node : path) {
+            switch (node.getValue()) {
+                case "Lörrach":
+                    positions.add(loerrach);
+                    break;
+                case "Weil am Rhein":
+                    positions.add(weil);
+                    break;
+                case "Binzen":
+                    positions.add(binzen);
+                    break;
+                case "Efringen-Kirchen":
+                    positions.add(efringen_kirchen);
+                    break;
+                case "Steinen":
+                    positions.add(steinen);
+                    break;
+                case "Maulburg":
+                    positions.add(maulburg);
+                    break;
+                case "Schopfheim":
+                    positions.add(schopfheim);
+                    break;
+                case "Hausen":
+                    positions.add(hausen);
+                    break;
+                case "Zell":
+                    positions.add(zell);
+                    break;
+                case "Wittlingen":
+                    positions.add(wittlingen);
+                    break;
+                case "Kandern":
+                    positions.add(kandern);
+                    break;
+                case "Bad Bellingen":
+                    positions.add(bad_bellingen);
+                    break;
+                case "Schliengen":
+                    positions.add(schliengen);
+                    break;
+                case "Auggen":
+                    positions.add(auggen);
+                    break;
+                case "Müllheim":
+                    positions.add(muellheim);
+                    break;
+                case "Malsburg-Marzell":
+                    positions.add(marzell);
+                    break;
+                case "Tegernau":
+                    positions.add(tegernau);
+                    break;
+                case "Schönau":
+                    positions.add(schoenau);
+                    break;
+                case "Münstertal":
+                    positions.add(muenstertal);
+                    break;
+                case "Staufen":
+                    positions.add(staufen);
+                    break;
+                case "Heitersheim":
+                    positions.add(heitersheim);
+                    break;
+            }
+        }
+        RoutePainter.nodes.addAll(positions);
+        RoutePainter.update();
     }
 
     protected static void updateWindowTitle(JFrame frame, JXMapViewer mapViewer)
