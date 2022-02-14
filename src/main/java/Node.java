@@ -1,5 +1,3 @@
-package pathfinding;
-
 public class Node {
     private final String value;
     private double gScores;

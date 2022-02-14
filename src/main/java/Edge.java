@@ -1,5 +1,3 @@
-package pathfinding;
-
 class Edge {
     private final double cost;
     private final Node target;

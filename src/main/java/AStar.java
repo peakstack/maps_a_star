@@ -1,5 +1,3 @@
-package pathfinding;
-
 import java.util.PriorityQueue;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,8 +5,6 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static pathfinding.City.*;
 
 public class AStar {
     private static double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
@@ -32,11 +28,11 @@ public class AStar {
      */
     public static List<Node> findPath(City start, City end){
         Node loerrach = new Node("Lörrach",
-                getDistanceFromLatLonInKm(LOERRACH.latitude, LOERRACH.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.LOERRACH.latitude, City.LOERRACH.longitude, end.latitude, end.longitude));
         Node weil = new Node("Weil am Rhein",
-                getDistanceFromLatLonInKm(WEIL.latitude, WEIL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.WEIL.latitude, City.WEIL.longitude, end.latitude, end.longitude));
         Node binzen = new Node("Binzen",
-                getDistanceFromLatLonInKm(BINZEN.latitude, BINZEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.BINZEN.latitude, City.BINZEN.longitude, end.latitude, end.longitude));
         Node efringen_kirchen = new Node("Efringen-Kirchen",
                 getDistanceFromLatLonInKm(City.EFRINGEN_KIRCHEN.latitude, City.EFRINGEN_KIRCHEN.longitude, end.latitude, end.longitude));
         Node steinen = new Node("Steinen",
@@ -66,13 +62,13 @@ public class AStar {
         Node tegernau = new Node("Tegernau",
                 getDistanceFromLatLonInKm(City.TEGERNAU.latitude, City.TEGERNAU.longitude, end.latitude, end.longitude));
         Node schoenau = new Node("Schönau",
-                getDistanceFromLatLonInKm(SCHOENAU.latitude, SCHOENAU.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.SCHOENAU.latitude, City.SCHOENAU.longitude, end.latitude, end.longitude));
         Node muenstertal = new Node("Münstertal",
-                getDistanceFromLatLonInKm(MUENSTERTAL.latitude, MUENSTERTAL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.MUENSTERTAL.latitude, City.MUENSTERTAL.longitude, end.latitude, end.longitude));
         Node staufen = new Node("Staufen",
-                getDistanceFromLatLonInKm(STAUFEN.latitude, STAUFEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.STAUFEN.latitude, City.STAUFEN.longitude, end.latitude, end.longitude));
         Node heitersheim = new Node("Heitersheim",
-                getDistanceFromLatLonInKm(HEITERSHEIM.latitude, HEITERSHEIM.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.HEITERSHEIM.latitude, City.HEITERSHEIM.longitude, end.latitude, end.longitude));
 
         loerrach.setAdjacencies(new Edge[]{
                 new Edge(steinen,8.0),

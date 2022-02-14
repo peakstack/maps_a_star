@@ -1,5 +1,3 @@
-package pathfinding;
-
 public enum City {
     LOERRACH(47.616, 7.668), WEIL(47.593, 7.623),
     BINZEN(47.631, 7.624), EFRINGEN_KIRCHEN(47.655, 7.563),
