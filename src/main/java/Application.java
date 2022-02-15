@@ -103,18 +103,11 @@ public class Application {
         final List<City> startCities = new ArrayList<>(Arrays.asList(City.values()));
         final List<City> endCities = new ArrayList<>(Arrays.asList(City.values()));
 
-        String[] tfLabelsStart = startCities
-                .stream()
-                .map(Enum::name)
-                .toArray(String[]::new);
+        City[] tfLabelsStart = startCities.toArray(new City[0]);
+        City[] tfLabelsEnd = endCities.toArray(new City[0]);
 
-        String[] tfLabelsEnd = endCities
-                .stream()
-                .map(Enum::name)
-                .toArray(String[]::new);
-
-        final JComboBox<String> startCombo = new JComboBox<>(tfLabelsStart);
-        final JComboBox<String> endCombo = new JComboBox<>(tfLabelsEnd);
+        final JComboBox<City> startCombo = new JComboBox<>(tfLabelsStart);
+        final JComboBox<City> endCombo = new JComboBox<>(tfLabelsEnd);
 
         startCombo.addActionListener(e -> searchRoute(startCombo, endCombo,
                 loerrach, weil, binzen, efringen_kirchen,
@@ -199,7 +192,7 @@ public class Application {
 
     private static final AtomicBoolean running = new AtomicBoolean(false);
 
-    private static void searchRoute(JComboBox<String> startCombo, JComboBox<String> endCombo,
+    private static void searchRoute(JComboBox<City> startCombo, JComboBox<City> endCombo,
                                     GeoPosition loerrach, GeoPosition weil, GeoPosition binzen,
                                     GeoPosition efringen_kirchen, GeoPosition steinen,
                                     GeoPosition maulburg, GeoPosition schopfheim, GeoPosition hausen,
@@ -208,10 +201,10 @@ public class Application {
                                     GeoPosition muellheim, GeoPosition marzell, GeoPosition tegernau,
                                     GeoPosition schoenau, GeoPosition muenstertal, GeoPosition staufen,
                                     GeoPosition heitersheim) {
-        City start = City.valueOf(Objects.requireNonNull(startCombo.getSelectedItem()).toString());
-        City end = City.valueOf(Objects.requireNonNull(endCombo.getSelectedItem()).toString());
+        City start = (City) startCombo.getSelectedItem();
+        City end = (City) endCombo.getSelectedItem();
 
-        List<Node> path = AStar.findPath(start, end);
+        List<Node> path = AStar.findPath(Objects.requireNonNull(start), Objects.requireNonNull(end));
 
         RoutePainter.nodes.clear();
         ArrayList<GeoPosition> positions = new ArrayList<>();
