@@ -8,9 +8,9 @@ public class Node {
     private final String value;
     private Edge[] adjacencyVector;
 
-    public Node(String val, double hVal){
-        this.value = val;
-        this.hScores = hVal;
+    public Node(String value, double hValue){
+        this.value = value;
+        this.hScores = hValue;
     }
 
     @Override
