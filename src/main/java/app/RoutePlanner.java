@@ -135,7 +135,7 @@ public class RoutePlanner {
         JButton button = new JButton("Demo");
 
         button.addActionListener(e -> {
-            playDemo(startCombo, endCombo);
+            playDemo();
         });
 
         topPanel.add(startPanel);
@@ -152,7 +152,7 @@ public class RoutePlanner {
         return frame;
     }
 
-    private void playDemo(JComboBox<City> startCombo, JComboBox<City> endCombo) {
+    private void playDemo() {
         running.set(!running.get());
 
         if (!running.get()) {
