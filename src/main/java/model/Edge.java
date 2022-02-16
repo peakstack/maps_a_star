@@ -1,12 +1,12 @@
 package model;
 
 public class Edge {
-    private final double cost;
     private final Node target;
+    private final double cost;
 
     public Edge(Node target, double cost){
-        this.target = target;
         this.cost = cost;
+        this.target = target;
     }
 
     public double getCost() {

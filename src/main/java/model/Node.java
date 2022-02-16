@@ -1,12 +1,12 @@
 package model;
 
 public class Node {
-    private final String value;
-    private double gScores;
     private final double hScores;
+    private double gScores;
     public double fScores = 0;
-    private Edge[] adjacencies;
-    private Node parent;
+    private Node parentNode;
+    private final String value;
+    private Edge[] adjacencyVector;
 
     public Node(String val, double hVal){
         this.value = val;
@@ -43,18 +43,18 @@ public class Node {
     }
 
     public void setParent(Node parent) {
-        this.parent = parent;
+        this.parentNode = parent;
     }
 
-    public Node getParent() {
-        return parent;
+    public Node getParentNode() {
+        return parentNode;
     }
 
     public Edge[] getAdjacencies() {
-        return adjacencies;
+        return adjacencyVector;
     }
 
-    public void setAdjacencies(Edge[] adjacencies) {
-        this.adjacencies = adjacencies;
+    public void setAdjacencies(Edge[] adjacencyVector) {
+        this.adjacencyVector = adjacencyVector;
     }
 }

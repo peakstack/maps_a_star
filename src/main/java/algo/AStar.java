@@ -343,7 +343,7 @@ public class AStar {
     public List<Node> printPath(Node targetNode){
         List<Node> path = new ArrayList<>();
 
-        for (Node node = targetNode; node != null; node = node.getParent()){
+        for (Node node = targetNode; node != null; node = node.getParentNode()){
             path.add(node);
         }
         Collections.reverse(path);
@@ -358,20 +358,20 @@ public class AStar {
         );
         sourceNode.setGScores(0);
         nodeQueue.add(sourceNode);
-        boolean found = false;
+        boolean goalFound = false;
 
-        while (!nodeQueue.isEmpty() && !found){
+        while (!nodeQueue.isEmpty() && !goalFound){
             Node currentNode = nodeQueue.poll();
             exploredNodes.add(currentNode);
 
             if (currentNode.getValue().equals(goal.getValue())){
-                found = true;
+                goalFound = true;
             }
 
             for (Edge edge : currentNode.getAdjacencies()){
                 Node child = edge.getTarget();
-                double cost = edge.getCost();
-                double tempGScores = currentNode.getGScores() + cost;
+                double currentCost = edge.getCost();
+                double tempGScores = currentNode.getGScores() + currentCost;
                 double tempFScores = tempGScores + child.getHScores();
                 double childFScores = child.getFScores();
 
