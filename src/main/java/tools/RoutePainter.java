@@ -1,3 +1,5 @@
+package tools;
+
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -10,7 +12,7 @@ import java.util.List;
 public class RoutePainter implements Painter<JXMapViewer> {
     private final Color color = Color.RED;
 
-    private static JXMapViewer mapViewer;
+    private JXMapViewer mapViewer;
 
     @Override
     public void paint(Graphics2D g, JXMapViewer map, int w, int h) {
@@ -42,9 +44,9 @@ public class RoutePainter implements Painter<JXMapViewer> {
         g.drawLine((int) pt2.getX(), (int) pt2.getY(), (int) pt.getX(), (int) pt.getY());
     }
 
-    public static List<GeoPosition> nodes = new ArrayList<>();
+    private final List<GeoPosition> nodes = new ArrayList<>();
 
-    public static void update() {
+    public void update() {
         mapViewer.repaint();
     }
 
@@ -59,5 +61,13 @@ public class RoutePainter implements Painter<JXMapViewer> {
 
             drawLine(pos, nextPos, map, g);
         }
+    }
+
+    public void clearNodes() {
+        nodes.clear();
+    }
+
+    public void addNodes(ArrayList<GeoPosition> positions) {
+        nodes.addAll(positions);
     }
 }

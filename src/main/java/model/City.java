@@ -1,3 +1,5 @@
+package model;
+
 public enum City {
     LOERRACH(47.616, 7.668, "Lörrach"), WEIL(47.593, 7.623, "Weil am Rhein"),
     BINZEN(47.631, 7.624, "Binzen"), EFRINGEN_KIRCHEN(47.655, 7.563, "Efringen-Kirchen"),

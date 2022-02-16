@@ -1,3 +1,9 @@
+package algo;
+
+import model.City;
+import model.Edge;
+import model.Node;
+
 import java.util.PriorityQueue;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class AStar {
-    private static double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
+    private double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
         int R = 6371; // Radius of the earth in km
         double dLat = deg2rad(lat2-lat1);
         double dLon = deg2rad(lon2-lon1);
@@ -18,7 +24,7 @@ public class AStar {
         return R * c; //distance in km
     }
 
-    private static double deg2rad(double deg) {
+    private double deg2rad(double deg) {
         return deg * (Math.PI / 180.0D);
     }
 
@@ -26,49 +32,49 @@ public class AStar {
      * Die Kosten sind die realen Streckenwerte
      * Die H-Kosten sind die berechneten Luft-Distanzen der verschiedenen Geo-Punkte
      */
-    public static List<Node> findPath(City start, City end){
+    public List<Node> findPath(City start, City end){
         Node loerrach = new Node("Lörrach",
-                getDistanceFromLatLonInKm(City.LOERRACH.latitude, City.LOERRACH.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.LOERRACH.getLatitude(), City.LOERRACH.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node weil = new Node("Weil am Rhein",
-                getDistanceFromLatLonInKm(City.WEIL.latitude, City.WEIL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.WEIL.getLatitude(), City.WEIL.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node binzen = new Node("Binzen",
-                getDistanceFromLatLonInKm(City.BINZEN.latitude, City.BINZEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.BINZEN.getLatitude(), City.BINZEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node efringen_kirchen = new Node("Efringen-Kirchen",
-                getDistanceFromLatLonInKm(City.EFRINGEN_KIRCHEN.latitude, City.EFRINGEN_KIRCHEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.EFRINGEN_KIRCHEN.getLatitude(), City.EFRINGEN_KIRCHEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node steinen = new Node("Steinen",
-                getDistanceFromLatLonInKm(City.STEINEN.latitude, City.STEINEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.STEINEN.getLatitude(), City.STEINEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node maulburg = new Node("Maulburg",
-                getDistanceFromLatLonInKm(City.MAULBURG.latitude, City.MAULBURG.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.MAULBURG.getLatitude(), City.MAULBURG.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node schopfheim = new Node("Schopfheim",
-                getDistanceFromLatLonInKm(City.SCHOPFHEIM.latitude, City.SCHOPFHEIM.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.SCHOPFHEIM.getLatitude(), City.SCHOPFHEIM.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node hausen = new Node("Hausen",
-                getDistanceFromLatLonInKm(City.HAUSEN.latitude, City.HAUSEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.HAUSEN.getLatitude(), City.HAUSEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node zell = new Node("Zell",
-                getDistanceFromLatLonInKm(City.ZELL.latitude, City.ZELL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.ZELL.getLatitude(), City.ZELL.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node wittlingen = new Node("Wittlingen",
-                getDistanceFromLatLonInKm(City.WITTLINGEN.latitude, City.WITTLINGEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.WITTLINGEN.getLatitude(), City.WITTLINGEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node kandern = new Node("Kandern",
-                getDistanceFromLatLonInKm(City.KANDERN.latitude, City.KANDERN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.KANDERN.getLatitude(), City.KANDERN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node bad_bellingen = new Node("Bad Bellingen",
-                getDistanceFromLatLonInKm(City.BAD_BELLINGEN.latitude, City.BAD_BELLINGEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.BAD_BELLINGEN.getLatitude(), City.BAD_BELLINGEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node schliengen = new Node("Schliengen",
-                getDistanceFromLatLonInKm(City.SCHLIENGEN.latitude, City.SCHLIENGEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.SCHLIENGEN.getLatitude(), City.SCHLIENGEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node auggen = new Node("Auggen",
-                getDistanceFromLatLonInKm(City.AUGGEN.latitude, City.AUGGEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.AUGGEN.getLatitude(), City.AUGGEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node muellheim = new Node("Müllheim",
-                getDistanceFromLatLonInKm(City.MUELLHEIM.latitude, City.MUELLHEIM.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.MUELLHEIM.getLatitude(), City.MUELLHEIM.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node marzell = new Node("Malsburg-Marzell",
-                getDistanceFromLatLonInKm(City.MARZELL.latitude, City.MARZELL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.MARZELL.getLatitude(), City.MARZELL.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node tegernau = new Node("Tegernau",
-                getDistanceFromLatLonInKm(City.TEGERNAU.latitude, City.TEGERNAU.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.TEGERNAU.getLatitude(), City.TEGERNAU.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node schoenau = new Node("Schönau",
-                getDistanceFromLatLonInKm(City.SCHOENAU.latitude, City.SCHOENAU.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.SCHOENAU.getLatitude(), City.SCHOENAU.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node muenstertal = new Node("Münstertal",
-                getDistanceFromLatLonInKm(City.MUENSTERTAL.latitude, City.MUENSTERTAL.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.MUENSTERTAL.getLatitude(), City.MUENSTERTAL.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node staufen = new Node("Staufen",
-                getDistanceFromLatLonInKm(City.STAUFEN.latitude, City.STAUFEN.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.STAUFEN.getLatitude(), City.STAUFEN.getLongitude(), end.getLatitude(), end.getLongitude()));
         Node heitersheim = new Node("Heitersheim",
-                getDistanceFromLatLonInKm(City.HEITERSHEIM.latitude, City.HEITERSHEIM.longitude, end.latitude, end.longitude));
+                getDistanceFromLatLonInKm(City.HEITERSHEIM.getLatitude(), City.HEITERSHEIM.getLongitude(), end.getLatitude(), end.getLongitude()));
 
         loerrach.setAdjacencies(new Edge[]{
                 new Edge(steinen,8.0),
@@ -334,7 +340,7 @@ public class AStar {
         return printPath(endNode);
     }
 
-    public static List<Node> printPath(Node targetNode){
+    public List<Node> printPath(Node targetNode){
         List<Node> path = new ArrayList<>();
 
         for (Node node = targetNode; node != null; node = node.getParent()){
@@ -344,7 +350,7 @@ public class AStar {
         return path;
     }
 
-    private static void executeSearch(Node sourceNode, Node goal){
+    private void executeSearch(Node sourceNode, Node goal){
         Set<Node> exploredNodes = new HashSet<>();
 
         PriorityQueue<Node> nodeQueue = new PriorityQueue<>(30,
