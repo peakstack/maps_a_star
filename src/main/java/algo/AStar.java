@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class AStar {
+    //Haversine-Formel
+    //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
     private double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
         int R = 6371; // Radius of the earth in km
         double dLat = deg2rad(lat2-lat1);
