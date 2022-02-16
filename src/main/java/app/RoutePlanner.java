@@ -111,8 +111,8 @@ public class RoutePlanner {
         mapViewer.addMouseMotionListener(sa);
         mapViewer.setOverlayPainter(cp);
 
-        startCombo.addActionListener(e -> searchRoute(startCombo, endCombo));
-        endCombo.addActionListener(e -> searchRoute(startCombo, endCombo));
+        startCombo.addActionListener(e -> searchRoute());
+        endCombo.addActionListener(e -> searchRoute());
 
         final JFrame frame = createJFrame(mapViewer);
 
@@ -165,7 +165,7 @@ public class RoutePlanner {
                     }
                     startCombo.setSelectedIndex(i);
                     endCombo.setSelectedIndex(j);
-                    searchRoute(startCombo, endCombo);
+                    searchRoute();
 
                     try {
                         Thread.sleep(300);
@@ -178,7 +178,7 @@ public class RoutePlanner {
 
     private final AStar aStar = new AStar();
 
-    private void searchRoute(JComboBox<City> startCombo, JComboBox<City> endCombo) {
+    private void searchRoute() {
         City start = (City) startCombo.getSelectedItem();
         City end = (City) endCombo.getSelectedItem();
 
