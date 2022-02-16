@@ -134,9 +134,7 @@ public class RoutePlanner {
 
         JButton button = new JButton("Demo");
 
-        button.addActionListener(e -> {
-            playDemo();
-        });
+        button.addActionListener(e -> playDemo());
 
         topPanel.add(startPanel);
         topPanel.add(endPanel);
