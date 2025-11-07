@@ -112,19 +112,31 @@ public class GraphBuilder {
      * @param cost  the cost (distance) of the edge
      */
     private void addEdge(City city1, City city2, double cost) {
-        Node node1 = cityNodeMap.get(city1);
-        Node node2 = cityNodeMap.get(city2);
+        addDirectedEdge(city1, city2, cost);
+        addDirectedEdge(city2, city1, cost);
+    }
 
-        Edge[] adjacencies1 = node1.getAdjacencies();
-        Edge[] newAdjacencies1 = adjacencies1 == null ?
+    /**
+     * Adds a directed edge from one city to another.
+     *
+     * @param from the source city
+     * @param to   the destination city
+     * @param cost the cost (distance) of the edge
+     */
+    private void addDirectedEdge(City from, City to, double cost) {
+        Node fromNode = cityNodeMap.get(from);
+        Node toNode = cityNodeMap.get(to);
+
+        Edge[] adjacencies = fromNode.getAdjacencies();
+        Edge[] newAdjacencies = adjacencies == null ?
                 new Edge[1] :
-                new Edge[adjacencies1.length + 1];
+                new Edge[adjacencies.length + 1];
 
-        if (adjacencies1 != null) {
-            System.arraycopy(adjacencies1, 0, newAdjacencies1, 0, adjacencies1.length);
+        if (adjacencies != null) {
+            System.arraycopy(adjacencies, 0, newAdjacencies, 0, adjacencies.length);
         }
-        newAdjacencies1[newAdjacencies1.length - 1] = new Edge(node2, cost);
-        node1.setAdjacencies(newAdjacencies1);
+        newAdjacencies[newAdjacencies.length - 1] = new Edge(toNode, cost);
+        fromNode.setAdjacencies(newAdjacencies);
     }
 
     /**

@@ -79,25 +79,28 @@ public class AStar {
 
             exploredNodes.add(currentNode);
 
-            for (Edge edge : currentNode.getAdjacencies()) {
-                Node child = edge.getTarget();
-                double currentCost = edge.getCost();
-                double tempGScores = currentNode.getGScores() + currentCost;
-                double tempFScores = tempGScores + child.getHScores();
+            Edge[] adjacencies = currentNode.getAdjacencies();
+            if (adjacencies != null) {
+                for (Edge edge : adjacencies) {
+                    Node child = edge.getTarget();
+                    double currentCost = edge.getCost();
+                    double tempGScores = currentNode.getGScores() + currentCost;
+                    double tempFScores = tempGScores + child.getHScores();
 
-                if (exploredNodes.contains(child) && tempFScores >= child.getFScores()) {
-                    continue;
-                }
+                    if (exploredNodes.contains(child) && tempFScores >= child.getFScores()) {
+                        continue;
+                    }
 
-                if (!nodeQueue.contains(child) || tempFScores < child.getFScores()) {
-                    exploredNodes.remove(child);
+                    if (!nodeQueue.contains(child) || tempFScores < child.getFScores()) {
+                        exploredNodes.remove(child);
 
-                    child.setParent(currentNode);
-                    child.setGScores(tempGScores);
-                    child.setFScores(tempFScores);
+                        child.setParent(currentNode);
+                        child.setGScores(tempGScores);
+                        child.setFScores(tempFScores);
 
-                    nodeQueue.remove(child);
-                    nodeQueue.add(child);
+                        nodeQueue.remove(child);
+                        nodeQueue.add(child);
+                    }
                 }
             }
         }
