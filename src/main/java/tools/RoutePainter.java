@@ -9,6 +9,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Painter for rendering routes on the map.
+ * Draws lines between geographic positions with anti-aliasing.
+ */
 public class RoutePainter implements Painter<JXMapViewer> {
     private final Color color = Color.RED;
 
@@ -46,10 +50,19 @@ public class RoutePainter implements Painter<JXMapViewer> {
 
     private final List<GeoPosition> nodes = new ArrayList<>();
 
+    /**
+     * Triggers a repaint of the map viewer.
+     */
     public void update() {
         mapViewer.repaint();
     }
 
+    /**
+     * Draws the route by connecting all nodes with lines.
+     *
+     * @param g   the graphics context
+     * @param map the map viewer
+     */
     private void drawRoute(Graphics2D g, JXMapViewer map) {
         for (int i = 0; i < nodes.size(); i++) {
             if (i == nodes.size() - 1) {
@@ -63,10 +76,18 @@ public class RoutePainter implements Painter<JXMapViewer> {
         }
     }
 
+    /**
+     * Clears all nodes from the route.
+     */
     public void clearNodes() {
         nodes.clear();
     }
 
+    /**
+     * Adds new positions to the route.
+     *
+     * @param positions the positions to add
+     */
     public void addNodes(ArrayList<GeoPosition> positions) {
         nodes.addAll(positions);
     }

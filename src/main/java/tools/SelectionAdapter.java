@@ -5,6 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
+/**
+ * Mouse adapter for handling selection interactions on the map viewer.
+ * Responds to right-click drag events.
+ */
 public class SelectionAdapter extends MouseAdapter {
     private boolean dragging;
     private final JXMapViewer viewer;
